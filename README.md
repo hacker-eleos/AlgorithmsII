@@ -1,1 +1,1 @@
-# Algorithms, Part 2 -- Assignment Solutions
+# Algorithms, Part II by Princeton University on Coursera
