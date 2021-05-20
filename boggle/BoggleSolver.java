@@ -11,8 +11,6 @@ import edu.princeton.cs.algs4.StdOut;
 public class BoggleSolver {
 
     private final FastPrefixTrieSET dictionary = new FastPrefixTrieSET();
-
-
     // Initializes the data structure using the given array of strings as the dictionary.
     // (You can assume each word in the dictionary contains only the uppercase letters A through Z.)
     public BoggleSolver(String[] dictionary) {
