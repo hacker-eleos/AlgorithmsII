@@ -4,23 +4,37 @@
  *  Description:
  **************************************************************************** */
 
-import edu.princeton.cs.algs4.Insertion;
 import edu.princeton.cs.algs4.StdIn;
 
+import java.util.Arrays;
+
 public class CircularSuffixArray {
+
     private final int n;
-    private final int[] index;
+    private final Integer[] index;
+    private final char[] chars;
 
     // circular suffix array of s
     public CircularSuffixArray(String s) {
         if (s == null) throw new IllegalArgumentException();
         n = s.length();
-        String[] originalSuffixes = new String[n];
+        index = new Integer[n];
+        chars = new char[n];
         for (int i = 0; i < n; i++) {
-            originalSuffixes[i] = s.substring(i) + s.substring(0, i);
+            index[i] = i;
+            chars[i] = s.charAt(i);
         }
-        index = Insertion.indexSort(originalSuffixes);
+        Arrays.sort(index, (o1, o2) -> {
+            for (int i = 0; i < n; i++) {
+                char c1 = chars[(i + o1) % n];
+                char c2 = chars[(i + o2) % n];
+                if (c1 > c2) return 1;
+                if (c1 < c2) return -1;
+            }
+            return 0;
+        });
     }
+
 
     // unit testing (required)
     public static void main(String[] args) {
@@ -31,7 +45,7 @@ public class CircularSuffixArray {
         String s = st.toString();
         CircularSuffixArray circularSuffixArray = new CircularSuffixArray(s);
         for (int i = 0; i < s.length(); i++) {
-            System.out.println(circularSuffixArray.index(i));
+            System.out.print(circularSuffixArray.index(i) + " ");
         }
     }
 
@@ -46,5 +60,4 @@ public class CircularSuffixArray {
     public int length() {
         return n;
     }
-
 }
